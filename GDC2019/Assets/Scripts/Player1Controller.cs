@@ -19,15 +19,15 @@ public class Player1Controller : MonoBehaviour
             print("Test");
             transform.Translate(new Vector3(0, 0, MovementSpeed));
         }
-        /*else*/ if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             transform.Translate(new Vector3(0, 0, -MovementSpeed));
         }
-        /*else*/ if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.A))
         {
             transform.Translate(new Vector3(-MovementSpeed, 0, 0));
         }
-        /*else*/ if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
             transform.Translate(new Vector3(MovementSpeed, 0, 0));
         }
