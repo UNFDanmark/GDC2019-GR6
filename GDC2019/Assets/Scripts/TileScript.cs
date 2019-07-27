@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class TileCollision : MonoBehaviour
+public class TileScript : MonoBehaviour
 {
     //Player 1 is the light player
     //Player 2 is the dark player
@@ -12,6 +13,10 @@ public class TileCollision : MonoBehaviour
 
     public Material TileDark;
     public Material TileLight;
+    public GameObject DeathTrigger;
+
+    public float FallDelay = 3;
+    public float FallTimestamp;
 
     Renderer renderer;
     Rigidbody rigidbody;
@@ -29,21 +34,35 @@ public class TileCollision : MonoBehaviour
         if (collisionInfo.collider.tag == "Player1" && LightFlag == 1 && DarkFlag == 0)
         {
             LightFlag = 2;
-            print("2");
-            //rigidbody.useGravity = true;
-            Destroy(gameObject);
+            FallTimestamp = Time.time;
 
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+
+            Instantiate(DeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
+
+            if (FallTimestamp + FallDelay <= Time.time)
+            {
+                Destroy(gameObject);
+            }
         }
 
         //If Player2 leaves a tile it has left before, Destroy gameobject
         if (collisionInfo.collider.tag == "Player2" && LightFlag == 0 && DarkFlag == 1)
         {
             DarkFlag = 2;
-            print("2");
-      
-            //rigidbody.useGravity = true;
-            Destroy(gameObject);
 
+            FallTimestamp = Time.time;
+
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+
+            Instantiate(DeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
+
+            if (FallTimestamp + FallDelay <= Time.time)
+            {
+                Destroy(gameObject);
+            }
 
         }
 
@@ -51,7 +70,7 @@ public class TileCollision : MonoBehaviour
         if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 0)
         {
             LightFlag = 1;
-            print("1");
+            
             renderer.material = TileLight;
 
         }
@@ -60,8 +79,19 @@ public class TileCollision : MonoBehaviour
         if (collisionInfo.collider.tag == "Player2" && LightFlag == 0 && DarkFlag == 0)
         {
             DarkFlag = 1;
-            print("1");
+            
             renderer.material = TileDark;
-        }                
+        }
+        if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
+        {
+            SceneManager.LoadScene("OptimoWinScene");
+        }
+        if (collisionInfo.collider.tag == "Player1" && LightFlag == 2 && DarkFlag == 0)
+        {
+            SceneManager.LoadScene("PessimoWinScene");
+        }
+
+
     }
+
 }
