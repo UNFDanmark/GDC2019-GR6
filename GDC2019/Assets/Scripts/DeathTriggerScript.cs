@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class DeathTriggerScript : MonoBehaviour
 {
   
-    void OnCollisionEnter(Collision collisionInfo)
+    void OnTriggerEnter(Collider other)
     {
-        if (collisionInfo.collider.tag == "Player2")
+        if (other.tag == "Player2")
         {
             SceneManager.LoadScene("OptimoWinScene");
         }
-        if (collisionInfo.collider.tag == "Player1")
+        if (other.tag == "Player1")
         {
             SceneManager.LoadScene("PessimoWinScene");
         }

@@ -28,6 +28,25 @@ public class TileScript : MonoBehaviour
     }
 
     //Reads if a specific player collides with tile
+
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 0)
+        {
+            
+
+            renderer.material = TileLight;
+
+        }
+
+        //If player 2 leaves an untouched tile, flag becomes one and material changes to dark
+        if (collisionInfo.collider.tag == "Player2" && LightFlag == 0 && DarkFlag == 0)
+        {
+            
+
+            renderer.material = TileDark;
+        }
+    }
     void OnCollisionExit(Collision collisionInfo)
     {
         //If Player1 leaves a tile it has left before, Destroy gameobject
