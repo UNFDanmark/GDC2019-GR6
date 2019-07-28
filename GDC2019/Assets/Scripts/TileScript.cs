@@ -17,7 +17,7 @@ public class TileScript : MonoBehaviour
 
     public float FallDelay = 3;
     public float FallTimestamp;
-    public bool light = false;
+    
 
     Renderer Painter;
     Rigidbody Rigid;
