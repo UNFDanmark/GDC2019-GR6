@@ -17,14 +17,15 @@ public class TileScript : MonoBehaviour
 
     public float FallDelay = 3;
     public float FallTimestamp;
+    public bool light = false;
 
-    Renderer renderer;
-    Rigidbody rigidbody;
+    Renderer Painter;
+    Rigidbody Rigid;
 
     void Start()
     {
-        renderer = GetComponent<Renderer>();
-        rigidbody = GetComponent<Rigidbody>();
+        Painter = GetComponent<Renderer>();
+        Rigid = GetComponent<Rigidbody>();
     }
 
     //Reads if a specific player collides with tile
@@ -35,7 +36,7 @@ public class TileScript : MonoBehaviour
         {
             
 
-            renderer.material = TileLight;
+            Painter.material = TileLight;
 
         }
 
@@ -44,7 +45,7 @@ public class TileScript : MonoBehaviour
         {
             
 
-            renderer.material = TileDark;
+            Painter.material = TileDark;
         }
     }
     void OnCollisionExit(Collision collisionInfo)
@@ -55,8 +56,8 @@ public class TileScript : MonoBehaviour
             LightFlag = 2;
             FallTimestamp = Time.time;
 
-            rigidbody.useGravity = true;
-            rigidbody.isKinematic = false;
+            Rigid.useGravity = true;
+            Rigid.isKinematic = false;
 
             Instantiate(DeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
 
@@ -73,8 +74,8 @@ public class TileScript : MonoBehaviour
 
             FallTimestamp = Time.time;
 
-            rigidbody.useGravity = true;
-            rigidbody.isKinematic = false;
+            Rigid.useGravity = true;
+            Rigid.isKinematic = false;
 
             Instantiate(DeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
 
@@ -90,7 +91,6 @@ public class TileScript : MonoBehaviour
         {
             LightFlag = 1;
             
-            renderer.material = TileLight;
 
         }
 
@@ -99,13 +99,12 @@ public class TileScript : MonoBehaviour
         {
             DarkFlag = 1;
             
-            renderer.material = TileDark;
-        }
+                    }
         if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
         {
             SceneManager.LoadScene("OptimoWinScene");
         }
-        if (collisionInfo.collider.tag == "Player1" && LightFlag == 2 && DarkFlag == 0)
+        if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 1)
         {
             SceneManager.LoadScene("PessimoWinScene");
         }
