@@ -19,7 +19,7 @@ public class WallScript : MonoBehaviour
         {
             if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
             {
-                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore = ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore + 1;
+                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
                 print(ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore);
                 SceneManager.LoadScene("GameScene");
                 
@@ -30,10 +30,11 @@ public class WallScript : MonoBehaviour
         {
             if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
             {
-                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore = ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore + 1;
-                print(ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore);
+                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
+                //print(ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore);
                 SceneManager.LoadScene("GameScene");
             }
         }
     }
 }
+ 

@@ -59,6 +59,7 @@ public class TileScript : MonoBehaviour
             FallTimestamp = Time.time;
 
             Rigid.useGravity = true;
+            print("heyo");
             Rigid.isKinematic = false;
 
             Instantiate(DeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
@@ -103,23 +104,25 @@ public class TileScript : MonoBehaviour
             
         }
 
-        if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
-        {
-            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
-            {
-                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore = ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
-                SceneManager.LoadScene("GameScene");
-            }
-        }
-        if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 1)
-        {
-            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
-            {
-                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore = ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
-                SceneManager.LoadScene("GameScene");
-            }
-        }
+        
+        
 
+        else if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
+        {
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            {
+                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
+                SceneManager.LoadScene("GameScene");
+            }
+        }
+        else if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 1)
+        {
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            {
+                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
+                SceneManager.LoadScene("GameScene");
+            }
+        }
 
     }
 
