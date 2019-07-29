@@ -8,6 +8,8 @@ TagManager:
   - Player2
   - ScoreManager
   - Canvas
+  - Round
+  - Map
   layers:
   - Default
   - TransparentFX

@@ -91,7 +91,19 @@ public class Player2Script : MonoBehaviour
             {
                 ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
                 ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
-                SceneManager.LoadScene("GameScene");
+                int mapSelected = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().mapSelect;
+                if (mapSelected == 0)
+                {
+                    SceneManager.LoadScene("GameScene");
+                }
+                if (mapSelected == 1)
+                {
+                    SceneManager.LoadScene("LargeGameScene");
+                }
+                if (mapSelected == 2)
+                {
+                    SceneManager.LoadScene("ObstacleGameScene");
+                }
                 ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore--;
                 ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore--;
 

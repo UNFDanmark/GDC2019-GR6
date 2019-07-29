@@ -22,6 +22,7 @@ public class TileScript : MonoBehaviour
 
     Renderer Painter;
     Rigidbody Rigid;
+    public int mapSelected;
 
     void Start()
     {
@@ -31,9 +32,13 @@ public class TileScript : MonoBehaviour
     }
 
     //Reads if a specific player collides with tile
-
+    void Update()
+    {
+        
+    }
     void OnCollisionEnter(Collision collisionInfo)
     {
+        int mapSelect = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().mapSelect;
         if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 0)
         {
 
@@ -52,6 +57,7 @@ public class TileScript : MonoBehaviour
     }
     void OnCollisionExit(Collision collisionInfo)
     {
+        int mapSelected = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().mapSelect;
         //If Player1 leaves a tile it has left before, Destroy gameobject
         if (collisionInfo.collider.tag == "Player1" && LightFlag == 1 && DarkFlag == 0)
         {
@@ -109,18 +115,41 @@ public class TileScript : MonoBehaviour
 
         else if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
         {
-            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 4 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 4)
             {
                 ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
-                SceneManager.LoadScene("GameScene");
+
+                if (mapSelected == 0)
+                {
+                    SceneManager.LoadScene("GameScene");
+                }
+                if (mapSelected == 1)
+                {
+                    SceneManager.LoadScene("LargeGameScene");
+                }
+                if (mapSelected == 2)
+                {
+                    SceneManager.LoadScene("ObstacleGameScene");
+                }
             }
         }
         else if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 1)
         {
-            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 4 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 4)
             {
                 ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
-                SceneManager.LoadScene("GameScene");
+                if (mapSelected == 0)
+                {
+                    SceneManager.LoadScene("GameScene");
+                }
+                if (mapSelected == 1)
+                {
+                    SceneManager.LoadScene("LargeGameScene");
+                }
+                if (mapSelected == 2)
+                {
+                    SceneManager.LoadScene("ObstacleGameScene");
+                }
             }
         }
 
