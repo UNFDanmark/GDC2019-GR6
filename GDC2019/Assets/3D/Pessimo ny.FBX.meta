@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: dd93941bb00ff0b4995c20824dd7ef4d
-=======
-guid: 13d1c26eaed02e1449f8d8090cae5dec
->>>>>>> 942dd0f689c7d95d19c63145dc410fe6fb224664
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
@@ -90,7 +86,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
