@@ -59,6 +59,7 @@ public class TileScript : MonoBehaviour
             FallTimestamp = Time.time;
 
             Rigid.useGravity = true;
+            print("heyo");
             Rigid.isKinematic = false;
 
             Instantiate(DeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);

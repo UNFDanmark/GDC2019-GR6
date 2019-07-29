@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class GameManagerScript : MonoBehaviour
         {
             Time.timeScale = 1;
             HasGameStarted = true;
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MenuScene");
         }
     }
 }

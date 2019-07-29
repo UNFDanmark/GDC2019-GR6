@@ -6,14 +6,13 @@ using UnityEngine.SceneManagement;
 public class Player2Script : MonoBehaviour
 {
     public float MovementSpeed = 0.1f;
-    public string dir = "left";
-    public bool AllowMove;
+    public string dir = "right";
     public float DistanceCovered;
 
     public Vector3 StartVector;
     public Vector3 EndVector;
     public Vector3[] directions;
-    public int i = 1;
+    public int i = 3;
 
     public GameObject ScoreObject;
     public GameManagerScript GameManager;
