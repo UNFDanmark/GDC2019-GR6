@@ -9,13 +9,15 @@ public class ScoreManagerScript : MonoBehaviour
     public int OptimoScore;
     public int PessimoScore;
 
-    public Text OptimoScoreText;
-    public Text PessimoScoreText;
+    Text OptimoScoreText;
+    Text PessimoScoreText;
 
-    public Text OptimoWinText;
-    public Text PessimoWinText;
+    Text OptimoWinText;
+    Text PessimoWinText;
 
-    public int delay;
+    public GameObject canvas;
+
+    public int delay = 5;
 
     void Awake()
     {
@@ -23,7 +25,43 @@ public class ScoreManagerScript : MonoBehaviour
     }
     void Start()
     {
-        
+        GameObject[] ScoreManagers = GameObject.FindGameObjectsWithTag("ScoreManager");
+        int scoreManagerNo = ScoreManagers.Length;
+        if (scoreManagerNo > 1)
+        {
+            if (ScoreManagers[0].GetComponent<ScoreManagerScript>().OptimoScore + ScoreManagers[0].GetComponent<ScoreManagerScript>().PessimoScore < ScoreManagers[1].GetComponent<ScoreManagerScript>().OptimoScore + ScoreManagers[1].GetComponent<ScoreManagerScript>().PessimoScore)
+            {
+                Destroy(ScoreManagers[0]);
+
+            }
+
+            else
+            {
+                Destroy(ScoreManagers[1]);
+            }
+       }
+
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
+        Text[] textArray= canvas.GetComponentsInChildren<Text>();
+        foreach (Text scoreText in textArray)
+        {
+            if(scoreText.name == "PessimoScoreText")
+            {
+                PessimoScoreText = scoreText;
+            }
+            else if (scoreText.name == "OptimoScoreText")
+            {
+                OptimoScoreText = scoreText;
+            }
+            else if (scoreText.name == "PessimoWinText")
+            {
+                PessimoWinText = scoreText;
+            }
+            else if (scoreText.name == "OptimoWinText")
+            {
+                OptimoWinText = scoreText;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -60,6 +98,7 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 SceneManager.LoadScene("GameScene");
+                OptimoWinText.enabled = false;
 
             }
 
@@ -70,22 +109,22 @@ public class ScoreManagerScript : MonoBehaviour
     {
         if (PessimoScore == 0)
         {
-            PessimoScoreText.text = "0 - Pessimo";
+            PessimoScoreText.text = "Pessimo - 0";
         }
 
         if (PessimoScore == 1)
         {
-            PessimoScoreText.text = "1 - Pessimo";
+            PessimoScoreText.text = "Pessimo - 1";
         }
 
         if (PessimoScore == 2)
         {
-            PessimoScoreText.text = "2 - Pessimo";
+            PessimoScoreText.text = "Pessimo - 2";
         }
 
         if (PessimoScore == 3)
         {
-            PessimoScoreText.text = "3 - Pessimo";
+            PessimoScoreText.text = "Pessimo - 3";
             PessimoWinText.enabled = true;
             float WinTime = Time.time;
             if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
@@ -93,6 +132,7 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 SceneManager.LoadScene("GameScene");
+                PessimoWinText.enabled = false;
 
             }
         }
