@@ -5,18 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class WallScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject ScoreObject;
+    
+
+    void Start()
+    {
+        ScoreObject = GameObject.FindWithTag("ScoreManager");
+    }
     void OnCollisionEnter(Collision collisionInfo)
     {
         //If Player1 leaves a tile it has left before, Destroy gameobject
         if (collisionInfo.collider.tag == "Player2")
         {
-            SceneManager.LoadScene("OptimoWinScene");
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            {
+                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore = ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore + 1;
+                print(ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore);
+                SceneManager.LoadScene("GameScene");
+                
+            }
         }
 
         if (collisionInfo.collider.tag == "Player1")
         {
-            SceneManager.LoadScene("PessimoWinScene");
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            {
+                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore = ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore + 1;
+                print(ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore);
+                SceneManager.LoadScene("GameScene");
+            }
         }
     }
 }

@@ -17,7 +17,8 @@ public class TileScript : MonoBehaviour
 
     public float FallDelay = 3;
     public float FallTimestamp;
-    
+
+    public GameObject ScoreObject;
 
     Renderer Painter;
     Rigidbody Rigid;
@@ -26,6 +27,7 @@ public class TileScript : MonoBehaviour
     {
         Painter = GetComponent<Renderer>();
         Rigid = GetComponent<Rigidbody>();
+        ScoreObject = GameObject.FindWithTag("ScoreManager");
     }
 
     //Reads if a specific player collides with tile
@@ -34,8 +36,8 @@ public class TileScript : MonoBehaviour
     {
         if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 0)
         {
-            
 
+            
             Painter.material = TileLight;
 
         }
@@ -99,14 +101,23 @@ public class TileScript : MonoBehaviour
         {
             DarkFlag = 1;
             
-                    }
+        }
+
         if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
         {
-            SceneManager.LoadScene("OptimoWinScene");
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            {
+                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore = ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
+                SceneManager.LoadScene("GameScene");
+            }
         }
         if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 1)
         {
-            SceneManager.LoadScene("PessimoWinScene");
+            if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
+            {
+                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore = ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
+                SceneManager.LoadScene("GameScene");
+            }
         }
 
 
