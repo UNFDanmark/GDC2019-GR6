@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player2Script : MonoBehaviour
 {
@@ -14,13 +15,14 @@ public class Player2Script : MonoBehaviour
     public Vector3[] directions;
     public int i = 1;
 
+    public GameObject ScoreObject;
     public GameManagerScript GameManager;
 
     void Start()
     {
         StartVector = new Vector3(transform.position.x, 3, transform.position.z);
         EndVector = StartVector + directions[i];
-
+        ScoreObject = GameObject.FindWithTag("ScoreManager");
     }
     void Update()
     {
@@ -80,5 +82,23 @@ public class Player2Script : MonoBehaviour
         EndVector = StartVector + directions[i];
     }
 
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Player1")
+        {
+            GameObject[] ScoreManagers = GameObject.FindGameObjectsWithTag("ScoreManager");
+            int scoreManagerNo = ScoreManagers.Length;
+            if (scoreManagerNo > 1)
+            {
+                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
+                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
+                SceneManager.LoadScene("GameScene");
+                ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore--;
+                ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore--;
+
+            }
+
+        }
+    }
 }
 

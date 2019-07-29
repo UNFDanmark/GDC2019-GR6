@@ -103,7 +103,10 @@ public class TileScript : MonoBehaviour
             
         }
 
-        if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
+        
+        
+
+        else if (collisionInfo.collider.tag == "Player2" && LightFlag == 1 && DarkFlag == 0)
         {
             if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
             {
@@ -111,7 +114,7 @@ public class TileScript : MonoBehaviour
                 SceneManager.LoadScene("GameScene");
             }
         }
-        if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 1)
+        else if (collisionInfo.collider.tag == "Player1" && LightFlag == 0 && DarkFlag == 1)
         {
             if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
             {
@@ -119,7 +122,6 @@ public class TileScript : MonoBehaviour
                 SceneManager.LoadScene("GameScene");
             }
         }
-
 
     }
 
