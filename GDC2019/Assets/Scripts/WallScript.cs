@@ -14,15 +14,26 @@ public class WallScript : MonoBehaviour
     }
     void OnCollisionEnter(Collision collisionInfo)
     {
-        //If Player1 leaves a tile it has left before, Destroy gameobject
+        int mapSelected = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().mapSelect;
         if (collisionInfo.collider.tag == "Player2")
         {
             if (ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore < 3 && ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore < 3)
             {
                 ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
                 print(ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore);
-                SceneManager.LoadScene("GameScene");
-                
+                if (mapSelected == 0)
+                {
+                    SceneManager.LoadScene("GameScene");
+                }
+                if (mapSelected == 1)
+                {
+                    SceneManager.LoadScene("LargeGameScene");
+                }
+                if (mapSelected == 2)
+                {
+                    SceneManager.LoadScene("ObstacleGameScene");
+                }
+
             }
         }
 
@@ -32,7 +43,18 @@ public class WallScript : MonoBehaviour
             {
                 ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
                 //print(ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore);
-                SceneManager.LoadScene("GameScene");
+                if (mapSelected == 0)
+                {
+                    SceneManager.LoadScene("GameScene");
+                }
+                if (mapSelected == 1)
+                {
+                    SceneManager.LoadScene("LargeGameScene");
+                }
+                if (mapSelected == 2)
+                {
+                    SceneManager.LoadScene("ObstacleGameScene");
+                }
             }
         }
     }

@@ -16,12 +16,22 @@ public class Player1Script :MonoBehaviour
 
     public GameManagerScript GameManager;
     public GameObject ScoreObject;
+    public Rigidbody rigid;
+
+    public Transform from;
+    public Transform to;
+
+    public float rotationSpeed = 5;
 
     void Start()
     {
         StartVector = transform.position;
         EndVector = StartVector + directions[i];
         ScoreObject = GameObject.FindWithTag("ScoreManager");
+        rigid = GetComponent<Rigidbody>();
+        //from = gameObject.transform.forward;
+        //to = directions[i];
+
     }
     void Update()
     {
@@ -64,6 +74,11 @@ public class Player1Script :MonoBehaviour
         if (DistanceCovered > 1) //the if-statement bottlenecks Distance Covered to a max of 1
         {
             DistanceCovered = 1;
+            //float timeCount = 0.0f;
+            //timeCount += rotationSpeed * Time.deltaTime;
+            //transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, timeCount);
+            
+            
         }
 
         if (Vector3.Distance(StartVector, transform.position) >= 2) //if the player has moved 2 or more units away from their start position , then reset distance covered and run FindNextDestination.
@@ -72,6 +87,7 @@ public class Player1Script :MonoBehaviour
             FindNextDestination();
         }
         transform.position = Vector3.Lerp(StartVector, EndVector, DistanceCovered); //moves the player according to percentage from a to b
+        print(rigid.velocity);
     }
 
     void FindNextDestination() //makes sure the player doesn't go further than the endvector, creates new vectors.
@@ -86,7 +102,19 @@ public class Player1Script :MonoBehaviour
         {
             ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore++;
             ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore++;
-            SceneManager.LoadScene("GameScene");
+            int mapSelected = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().mapSelect;
+            if (mapSelected == 0)
+            {
+                SceneManager.LoadScene("GameScene");
+            }
+            if (mapSelected == 1)
+            {
+                SceneManager.LoadScene("LargeGameScene");
+            }
+            if (mapSelected == 2)
+            {
+                SceneManager.LoadScene("ObstacleGameScene");
+            }
             ScoreObject.GetComponent<ScoreManagerScript>().OptimoScore--;
             ScoreObject.GetComponent<ScoreManagerScript>().PessimoScore--;
         }
