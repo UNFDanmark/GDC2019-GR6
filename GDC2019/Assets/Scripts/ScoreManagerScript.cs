@@ -138,10 +138,12 @@ public class ScoreManagerScript : MonoBehaviour
         {
             OptimoScoreText.text = "2 - Optimo";
             OptimoWinText.enabled = true;
+
             if (Input.GetKey(KeyCode.Return))
             {
                 OptimoScore = 0;
                 PessimoScore = 0;
+
                 if (mapSelect == 0)
                 {
                     SceneManager.LoadScene("GameScene");
