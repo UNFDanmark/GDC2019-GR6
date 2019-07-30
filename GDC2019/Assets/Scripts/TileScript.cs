@@ -46,8 +46,7 @@ public class TileScript : MonoBehaviour
 
             
             Painter.material = TileLight;
-            Instantiate(LightTileDeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
-
+            
         }
 
         //If player 2 leaves an untouched tile, flag becomes one and material changes to dark
@@ -56,8 +55,7 @@ public class TileScript : MonoBehaviour
             
 
             Painter.material = TileDark;
-            Instantiate(DarkTileDeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
-
+            
         }
     }
     void OnCollisionExit(Collision collisionInfo)
