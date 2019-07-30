@@ -18,10 +18,12 @@ public class Player1Script :MonoBehaviour
     public GameObject ScoreObject;
     public Rigidbody rigid;
 
-    public Transform from;
-    public Transform to;
+
+    //public int[] rotArray = {3,0,1,2,1,3,2,0,0,2,3,1,2,1,0,3};
 
     public float rotationSpeed = 5;
+    public int arrayTracker = 1;
+    Vector3 currentDir;
 
     void Start()
     {
@@ -49,23 +51,27 @@ public class Player1Script :MonoBehaviour
         {
             dir = "up";
             i = 0;
-
+            transform.eulerAngles = new Vector3(0,90,0);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             dir = "left";
             i = 1;
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             dir = "down";
             i = 2;
+            transform.eulerAngles = new Vector3(0, 270, 0);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             dir = "right";
             i = 3;
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
+        
     }
 
     void MoveInDirection()
@@ -74,11 +80,6 @@ public class Player1Script :MonoBehaviour
         if (DistanceCovered > 1) //the if-statement bottlenecks Distance Covered to a max of 1
         {
             DistanceCovered = 1;
-            //float timeCount = 0.0f;
-            //timeCount += rotationSpeed * Time.deltaTime;
-            //transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, timeCount);
-            
-            
         }
 
         if (Vector3.Distance(StartVector, transform.position) >= 2) //if the player has moved 2 or more units away from their start position , then reset distance covered and run FindNextDestination.
@@ -87,11 +88,12 @@ public class Player1Script :MonoBehaviour
             FindNextDestination();
         }
         transform.position = Vector3.Lerp(StartVector, EndVector, DistanceCovered); //moves the player according to percentage from a to b
-        print(rigid.velocity);
+        
     }
 
     void FindNextDestination() //makes sure the player doesn't go further than the endvector, creates new vectors.
     {
+        //currentDir = EndVector - StartVector;
         transform.position = EndVector;
         StartVector = transform.position;
         EndVector = StartVector + directions[i];

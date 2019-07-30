@@ -39,22 +39,25 @@ public class Player2Script : MonoBehaviour
         {
             dir = "up";
             i = 0;
-
+            transform.eulerAngles = new Vector3(0, 270, 0);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             dir = "left";
             i = 1;
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             dir = "down";
             i = 2;
+            transform.eulerAngles = new Vector3(0, 90, 0);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             dir = "right";
             i = 3;
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 
