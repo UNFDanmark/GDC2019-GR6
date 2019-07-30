@@ -1460,7 +1460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreObject: {fileID: 0}
-  mapSelected: 0
 --- !u!65 &165420021
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1735,7 +1734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e543513692b604468c40e4ae970903d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.2
+  MovementSpeed: 0.12
   dir: left
   DistanceCovered: 0
   StartVector: {x: 0, y: 0, z: 0}
@@ -1748,6 +1747,10 @@ MonoBehaviour:
   i: 1
   GameManager: {fileID: 567048085}
   ScoreObject: {fileID: 0}
+  rigid: {fileID: 0}
+  from: {fileID: 0}
+  to: {fileID: 0}
+  rotationSpeed: 5
 --- !u!4 &172943987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4827487214326911430, guid: eea94434279e57542b84606d31a858e1,
@@ -3155,7 +3158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreObject: {fileID: 0}
-  mapSelected: 0
 --- !u!4 &267705014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4827487214326911430, guid: eea94434279e57542b84606d31a858e1,
@@ -5254,7 +5256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreObject: {fileID: 0}
-  mapSelected: 0
 --- !u!4 &454287988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4827487214326911430, guid: eea94434279e57542b84606d31a858e1,
@@ -12554,7 +12555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e689b9e8e2bc5e24898eeb09f16ba51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.2
+  MovementSpeed: 0.12
   dir: right
   DistanceCovered: 0
   StartVector: {x: 0, y: 0, z: 0}
@@ -19000,7 +19001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreObject: {fileID: 0}
-  mapSelected: 0
 --- !u!1001 &2080529886
 PrefabInstance:
   m_ObjectHideFlags: 0

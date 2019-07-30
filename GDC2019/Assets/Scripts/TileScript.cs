@@ -14,6 +14,8 @@ public class TileScript : MonoBehaviour
     public Material TileDark;
     public Material TileLight;
     public GameObject DeathTrigger;
+    public GameObject LightTileDeathTrigger;
+    public GameObject DarkTileDeathTrigger;
 
     public float FallDelay = 3;
     public float FallTimestamp;
@@ -44,6 +46,7 @@ public class TileScript : MonoBehaviour
 
             
             Painter.material = TileLight;
+            Instantiate(LightTileDeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
 
         }
 
@@ -53,6 +56,8 @@ public class TileScript : MonoBehaviour
             
 
             Painter.material = TileDark;
+            Instantiate(DarkTileDeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
+
         }
     }
     void OnCollisionExit(Collision collisionInfo)
@@ -86,7 +91,7 @@ public class TileScript : MonoBehaviour
             Rigid.useGravity = true;
             Rigid.isKinematic = false;
 
-            Instantiate(DeathTrigger, new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
+            
 
             if (FallTimestamp + FallDelay <= Time.time)
             {
