@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DontDestroyCanvasScript : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class DontDestroyCanvasScript : MonoBehaviour
         if (CanvasNo > 1)
         {
             Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(EventSystem.current.gameObject);
         }
     }
 
