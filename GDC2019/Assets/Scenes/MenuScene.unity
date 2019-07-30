@@ -252,6 +252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSelected: 0
+  audioPause: {fileID: 1008674367}
+  audioScreen: {fileID: 1008674367}
 --- !u!114 &66864279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2115,6 +2117,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!82 &1008674367 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8540229395539506850, guid: 794d03fa26789614b85706be8474a17a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8540229395474916870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1030579588
 GameObject:
   m_ObjectHideFlags: 0
@@ -3291,5 +3299,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8540229395539506851, guid: 794d03fa26789614b85706be8474a17a,
+        type: 3}
+      propertyPath: audioPause
+      value: 
+      objectReference: {fileID: 8300000, guid: b8fc98f3efb20644a8370ae3c1cea7ab, type: 3}
+    - target: {fileID: 8540229395539506851, guid: 794d03fa26789614b85706be8474a17a,
+        type: 3}
+      propertyPath: audioSoundtrack
+      value: 
+      objectReference: {fileID: 8300000, guid: 22fb7047cf780cb48bfc58f98c4ef66e, type: 3}
+    - target: {fileID: 8540229395539506850, guid: 794d03fa26789614b85706be8474a17a,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b8fc98f3efb20644a8370ae3c1cea7ab, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 794d03fa26789614b85706be8474a17a, type: 3}

@@ -23,14 +23,50 @@ public class ScoreManagerScript : MonoBehaviour
 
     int currentScene;
 
-
+    public AudioClip audioPause;
+    public AudioClip audioSoundtrack;
+    AudioSource aS;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    public void OnSceneChange(string sceneName) {
+        if (sceneName == "GameScene")
+        {
+            aS.clip = audioSoundtrack;
+            aS.Play();
+        } else if (sceneName == "LargeGameScene")
+        {
+            aS.clip = audioSoundtrack;
+            aS.Play();
+        }
+        else if (sceneName == "MenuScene")
+        {
+            aS.clip = audioPause;
+            aS.Play();
+        }
+        else if (sceneName == "ObstacleGameScene")
+        {
+            aS.clip = audioSoundtrack;
+            aS.Play();
+        }
+        else if (sceneName == "OptimoWinScene")
+        {
+            aS.clip = audioSoundtrack;
+            aS.Play();
+        }
+        else if (sceneName == "PessimoWinScene")
+        {
+            aS.clip = audioSoundtrack;
+            aS.Play();
+        }
+    }
+
     void Start()
     {
+        aS = GetComponent<AudioSource>();
         GameObject[] ScoreManagers = GameObject.FindGameObjectsWithTag("ScoreManager");
         int scoreManagerNo = ScoreManagers.Length;
         if (scoreManagerNo > 1)
@@ -67,6 +103,7 @@ public class ScoreManagerScript : MonoBehaviour
             {
                 OptimoWinText = scoreText;
             }
+            
         }
     }
 
@@ -80,7 +117,9 @@ public class ScoreManagerScript : MonoBehaviour
         {
             mapSelect = GameObject.FindGameObjectWithTag("Map").GetComponent<MapSelectorScript>().mapSelected;
             roundsSelected = GameObject.FindGameObjectWithTag("Round").GetComponent<RoundsSelectedScript>().roundsSelected;
+            GetComponent<AudioClip>();
         }
+        
     }
 
     public void OptimoScoreFunction()
@@ -108,14 +147,18 @@ public class ScoreManagerScript : MonoBehaviour
                 if (mapSelect == 0)
                 {
                     SceneManager.LoadScene("GameScene");
+                    GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
                 }
                 if (mapSelect == 1)
                 {
                     SceneManager.LoadScene("LargeGameScene");
+                    GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
                 }
                 if (mapSelect == 2)
                 {
                     SceneManager.LoadScene("ObstacleGameScene");
+                    GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
+
                 }
                 OptimoWinText.enabled = false;
 
