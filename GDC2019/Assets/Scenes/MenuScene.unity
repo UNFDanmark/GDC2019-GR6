@@ -3244,6 +3244,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8540229395539506850, guid: 794d03fa26789614b85706be8474a17a,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b8fc98f3efb20644a8370ae3c1cea7ab, type: 3}
     - target: {fileID: 8540229395539506848, guid: 794d03fa26789614b85706be8474a17a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3309,10 +3314,15 @@ PrefabInstance:
       propertyPath: audioSoundtrack
       value: 
       objectReference: {fileID: 8300000, guid: 22fb7047cf780cb48bfc58f98c4ef66e, type: 3}
-    - target: {fileID: 8540229395539506850, guid: 794d03fa26789614b85706be8474a17a,
+    - target: {fileID: 8540229395539506851, guid: 794d03fa26789614b85706be8474a17a,
         type: 3}
-      propertyPath: m_audioClip
+      propertyPath: audioPessimoWin
       value: 
-      objectReference: {fileID: 8300000, guid: b8fc98f3efb20644a8370ae3c1cea7ab, type: 3}
+      objectReference: {fileID: 8300000, guid: 76fda419853dd3c4e8df3306b4d38d88, type: 3}
+    - target: {fileID: 8540229395539506851, guid: 794d03fa26789614b85706be8474a17a,
+        type: 3}
+      propertyPath: audioOptimoWin
+      value: 
+      objectReference: {fileID: 8300000, guid: e8ddc5d1401f8e4489f6f8d4122e4434, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 794d03fa26789614b85706be8474a17a, type: 3}

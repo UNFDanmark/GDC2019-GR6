@@ -25,19 +25,25 @@ public class ScoreManagerScript : MonoBehaviour
 
     public AudioClip audioPause;
     public AudioClip audioSoundtrack;
+    public AudioClip audioPessimoWin;
+    public AudioClip audioOptimoWin;
     AudioSource aS;
+
+    bool hasAlreadyPlayedWon = false;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void OnSceneChange(string sceneName) {
+    public void OnSceneChange(string sceneName)
+    {
         if (sceneName == "GameScene")
         {
             aS.clip = audioSoundtrack;
             aS.Play();
-        } else if (sceneName == "LargeGameScene")
+        }
+        else if (sceneName == "LargeGameScene")
         {
             aS.clip = audioSoundtrack;
             aS.Play();
@@ -54,12 +60,12 @@ public class ScoreManagerScript : MonoBehaviour
         }
         else if (sceneName == "OptimoWinScene")
         {
-            aS.clip = audioSoundtrack;
+            aS.clip = audioOptimoWin;
             aS.Play();
         }
         else if (sceneName == "PessimoWinScene")
         {
-            aS.clip = audioSoundtrack;
+            aS.clip = audioPessimoWin;
             aS.Play();
         }
     }
@@ -81,13 +87,13 @@ public class ScoreManagerScript : MonoBehaviour
             {
                 Destroy(ScoreManagers[1]);
             }
-       }
+        }
 
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        Text[] textArray= canvas.GetComponentsInChildren<Text>();
+        Text[] textArray = canvas.GetComponentsInChildren<Text>();
         foreach (Text scoreText in textArray)
         {
-            if(scoreText.name == "PessimoScoreText")
+            if (scoreText.name == "PessimoScoreText")
             {
                 PessimoScoreText = scoreText;
             }
@@ -103,7 +109,7 @@ public class ScoreManagerScript : MonoBehaviour
             {
                 OptimoWinText = scoreText;
             }
-            
+
         }
     }
 
@@ -119,55 +125,36 @@ public class ScoreManagerScript : MonoBehaviour
             roundsSelected = GameObject.FindGameObjectWithTag("Round").GetComponent<RoundsSelectedScript>().roundsSelected;
             GetComponent<AudioClip>();
         }
-        
+
     }
 
-    public void OptimoScoreFunction()
+    public void PessimoScoreFunction()
     {
-        if (OptimoScore == 0)
+
+        if (PessimoScore == 0)
         {
-            OptimoScoreText.text = "0 - Optimo";
+            PessimoScoreText.text = "Pessimo - 0";
         }
 
-        if (OptimoScore == 1)
+        if (PessimoScore == 1)
         {
-            OptimoScoreText.text = "1 - Optimo";
+            PessimoScoreText.text = "Pessimo - 1";
         }
 
-        if (OptimoScore == 2 && roundsSelected == 0)
+        if (PessimoScore == 2 && roundsSelected == 0)
         {
-            OptimoScoreText.text = "2 - Optimo";
-            OptimoWinText.enabled = true;
-            if (Input.GetKey(KeyCode.Return))
-            {
-                OptimoScore = 0;
-                PessimoScore = 0;
-                if (mapSelect == 0)
-                {
-                    SceneManager.LoadScene("GameScene");
-                    GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
-                }
-                if (mapSelect == 1)
-                {
-                    SceneManager.LoadScene("LargeGameScene");
-                    GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
-                }
-                if (mapSelect == 2)
-                {
-                    SceneManager.LoadScene("ObstacleGameScene");
-                    GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
+            PessimoScoreText.text = "2";
+            PessimoWinText.enabled = true;
 
-                }
-                OptimoWinText.enabled = false;
-
-            }
-            if (OptimoScore == 3 && roundsSelected == 1)
+            if (hasAlreadyPlayedWon == false)
             {
-                OptimoScoreText.text = "3 - Optimo";
-                OptimoWinText.enabled = true;
-                float WinTime = Time.time;
-                if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
+                aS.Stop();
+                aS.PlayOneShot(audioPessimoWin);
+                hasAlreadyPlayedWon = true;
+
+                if (Input.GetKey(KeyCode.Return))
                 {
+                    PessimoWinText.enabled = false;
                     OptimoScore = 0;
                     PessimoScore = 0;
                     if (mapSelect == 0)
@@ -182,127 +169,202 @@ public class ScoreManagerScript : MonoBehaviour
                     {
                         SceneManager.LoadScene("ObstacleGameScene");
                     }
+                    PessimoWinText.enabled = false;
+                    hasAlreadyPlayedWon = false;
+                }
+            }
+        }
+        if (PessimoScore == 3 && roundsSelected == 1)
+        {
+            PessimoScoreText.text = "3 - Optimo";
+            PessimoWinText.enabled = true;
+            float WinTime = Time.time;
+            if (hasAlreadyPlayedWon == false)
+            {
+                aS.Stop();
+                aS.PlayOneShot(audioPessimoWin);
+                hasAlreadyPlayedWon = true;
+                if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
+                {
+                    PessimoWinText.enabled = false;
+                    OptimoScore = 0;
+                    PessimoScore = 0;
+                    if (mapSelect == 0)
+                    {
+                        SceneManager.LoadScene("GameScene");
+                    }
+                    if (mapSelect == 1)
+                    {
+                        SceneManager.LoadScene("LargeGameScene");
+                    }
+                    if (mapSelect == 2)
+                    {
+                        SceneManager.LoadScene("ObstacleGameScene");
+                    }
+                    
+                    hasAlreadyPlayedWon = false;
+                }
+            }
+        }
+
+        if (PessimoScore == 4 && roundsSelected == 2)
+        {
+            PessimoScoreText.text = "4 - Optimo";
+            PessimoWinText.enabled = true;
+            float WinTime = Time.time;
+            if (hasAlreadyPlayedWon == false)
+
+
+
+
+
+
+            {
+                aS.Stop();
+                aS.PlayOneShot(audioPessimoWin);
+                hasAlreadyPlayedWon = true;
+
+                if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
+                {
+                    PessimoWinText.enabled = false;
+                    OptimoScore = 0;
+                    PessimoScore = 0;
+                    if (mapSelect == 0)
+                    {
+                        SceneManager.LoadScene("GameScene");
+                    }
+                    if (mapSelect == 1)
+                    {
+                        SceneManager.LoadScene("LargeGameScene");
+                    }
+                    if (mapSelect == 2)
+                    {
+                        SceneManager.LoadScene("ObstacleGameScene");
+                    }
+                    hasAlreadyPlayedWon = false;
+                }
+            }
+        }
+
+    }
+
+
+
+        public void OptimoScoreFunction()
+        {
+            if (OptimoScore == 0)
+            {
+                OptimoScoreText.text = "0 - Optimo";
+            }
+
+            if (OptimoScore == 1)
+            {
+                OptimoScoreText.text = "1 - Optimo";
+            }
+
+            if (OptimoScore == 2 && roundsSelected == 0)
+            {
+                OptimoScoreText.text = "2 - Optimo";
+                OptimoWinText.enabled = true;
+                if (hasAlreadyPlayedWon == false)
+                {
+                    aS.Stop();
+                    aS.PlayOneShot(audioOptimoWin);
+                    hasAlreadyPlayedWon = true;
+
+
+                    if (Input.GetKey(KeyCode.Return))
+                    {
+                        OptimoScore = 0;
+                        PessimoScore = 0;
+                    }
+                    if (mapSelect == 0)
+                    {
+                        SceneManager.LoadScene("GameScene");
+                        GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
+                    }
+                    if (mapSelect == 1)
+                    {
+                        SceneManager.LoadScene("LargeGameScene");
+                        GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
+                    }
+                    if (mapSelect == 2)
+                    {
+                        SceneManager.LoadScene("ObstacleGameScene");
+                        GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
+
+                    }
                     OptimoWinText.enabled = false;
+                    hasAlreadyPlayedWon = false;
 
                 }
-
             }
-            if (OptimoScore == 4 && roundsSelected == 2)
+        if (OptimoScore == 4 && roundsSelected == 2)
+        {
+            OptimoScoreText.text = "4 - Optimo";
+            OptimoWinText.enabled = true;
+            float WinTime = Time.time;
+            if (hasAlreadyPlayedWon == false)
+            {
+                aS.Stop();
+                aS.PlayOneShot(audioOptimoWin);
+                hasAlreadyPlayedWon = true;
+                if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
+                {
+                    OptimoWinText.enabled = false;
+                    OptimoScore = 0;
+                    PessimoScore = 0;
+                    if (mapSelect == 0)
+                    {
+                        SceneManager.LoadScene("GameScene");
+                    }
+                    if (mapSelect == 1)
+                    {
+                        SceneManager.LoadScene("LargeGameScene");
+                    }
+                    if (mapSelect == 2)
+                    {
+                        SceneManager.LoadScene("ObstacleGameScene");
+                    }
+
+                    hasAlreadyPlayedWon = false;
+                }
+            }
+        }
+
+        if (OptimoScore == 4 && roundsSelected == 2)
             {
                 OptimoScoreText.text = "4 - Optimo";
                 OptimoWinText.enabled = true;
                 float WinTime = Time.time;
-                if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
+                if (hasAlreadyPlayedWon == false)
                 {
-                    OptimoScore = 0;
-                    PessimoScore = 0;
-                    if (mapSelect == 0)
+                    aS.Stop();
+                    aS.PlayOneShot(audioOptimoWin);
+                    hasAlreadyPlayedWon = true;
+                    if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
                     {
-                        SceneManager.LoadScene("GameScene");
+                        OptimoWinText.enabled = false;
+                        OptimoScore = 0;
+                        PessimoScore = 0;
+                        if (mapSelect == 0)
+                        {
+                            SceneManager.LoadScene("GameScene");
+                        }
+                        if (mapSelect == 1)
+                        {
+                            SceneManager.LoadScene("LargeGameScene");
+                        }
+                        if (mapSelect == 2)
+                        {
+                            SceneManager.LoadScene("ObstacleGameScene");
+                        }
+                        
+                        hasAlreadyPlayedWon = false;
                     }
-                    if (mapSelect == 1)
-                    {
-                        SceneManager.LoadScene("LargeGameScene");
-                    }
-                    if (mapSelect == 2)
-                    {
-                        SceneManager.LoadScene("ObstacleGameScene");
-                    }
-                    OptimoWinText.enabled = false;
-
                 }
-
             }
         }
     }
-        public void PessimoScoreFunction()
-        {
 
-        if (PessimoScore == 0)
-            {
-                PessimoScoreText.text = "Pessimo - 0";
-            }
-
-            if (PessimoScore == 1)
-            {
-                PessimoScoreText.text = "Pessimo - 1";
-            }
-
-        if (PessimoScore == 2 && roundsSelected == 0)
-        {
-            PessimoScoreText.text = "2 - Optimo";
-            PessimoWinText.enabled = true;
-            if (Input.GetKey(KeyCode.Return))
-            {
-                OptimoScore = 0;
-                PessimoScore = 0;
-                if (mapSelect == 0)
-                {
-                    SceneManager.LoadScene("GameScene");
-                }
-                if (mapSelect == 1)
-                {
-                    SceneManager.LoadScene("LargeGameScene");
-                }
-                if (mapSelect == 2)
-                {
-                    SceneManager.LoadScene("ObstacleGameScene");
-                }
-                PessimoWinText.enabled = false;
-
-            }
-            if (PessimoScore == 3 && roundsSelected == 1)
-            {
-                PessimoScoreText.text = "3 - Optimo";
-                PessimoWinText.enabled = true;
-                float WinTime = Time.time;
-                if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
-                {
-                    OptimoScore = 0;
-                    PessimoScore = 0;
-                    if (mapSelect == 0)
-                    {
-                        SceneManager.LoadScene("GameScene");
-                    }
-                    if (mapSelect == 1)
-                    {
-                        SceneManager.LoadScene("LargeGameScene");
-                    }
-                    if (mapSelect == 2)
-                    {
-                        SceneManager.LoadScene("ObstacleGameScene");
-                    }
-                    PessimoWinText.enabled = false;
-
-                }
-
-            }
-            if (PessimoScore == 4 && roundsSelected == 2)
-            {
-                PessimoScoreText.text = "4 - Optimo";
-                PessimoWinText.enabled = true;
-                float WinTime = Time.time;
-                if (Time.time > WinTime + delay || Input.GetKey(KeyCode.Return))
-                {
-                    OptimoScore = 0;
-                    PessimoScore = 0;
-                    if (mapSelect == 0)
-                    {
-                        SceneManager.LoadScene("GameScene");
-                    }
-                    if (mapSelect == 1)
-                    {
-                        SceneManager.LoadScene("LargeGameScene");
-                    }
-                    if (mapSelect == 2)
-                    {
-                        SceneManager.LoadScene("ObstacleGameScene");
-                    }
-                    PessimoWinText.enabled = false;
-
-                }
-
-            }
-        }
-    }
-}
+ 
