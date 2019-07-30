@@ -187,7 +187,7 @@ public class ScoreManagerScript : MonoBehaviour
             }
             
             
-            if (Input.GetKey(KeyCode.G) || Time.time > timeWon + winDelay)
+            if (Input.GetKey(KeyCode.G) || Time.time >= timeWon)
             {
                 OptimoScore = 0;
                 PessimoScore = 0;
@@ -232,7 +232,7 @@ public class ScoreManagerScript : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.G) || Time.time > timeWon + winDelay)
+            if (Input.GetKey(KeyCode.G) || Time.time >= timeWon)
             {
                 OptimoScore = 0;
                 PessimoScore = 0;
@@ -277,7 +277,7 @@ OptimoUnYeet();
             }
 
 
-            if (Input.GetKey(KeyCode.G) || Time.time > timeWon + winDelay)
+            if (Input.GetKey(KeyCode.G) || Time.time >= timeWon)
             {
                 OptimoScore = 0;
                 PessimoScore = 0;
@@ -336,7 +336,7 @@ OptimoUnYeet();
             }
 
 
-            if (Input.GetKey(KeyCode.G) || Time.time > timeWon + winDelay)
+            if (Input.GetKey(KeyCode.G) || Time.time >= timeWon)
             {
                 OptimoScore = 0;
                 PessimoScore = 0;
@@ -368,7 +368,7 @@ OptimoUnYeet();
         }
         if (PessimoScore == 3 && roundsSelected == 1)
         {
-            PessimoScoreText.text = "Pessimo 3";
+            PessimoScoreText.text = "Pessimo - 3";
             
 
             if (hasAlreadyPlayedWon == false)
@@ -377,12 +377,12 @@ OptimoUnYeet();
                 aS.PlayOneShot(audioPessimoWin);
                 hasAlreadyPlayedWon = true;
                 timeWon = Time.time;
-
-
+                print("won" + timeWon);
+                
             }
 
 
-            if (Input.GetKey(KeyCode.G) || Time.time > timeWon + winDelay)
+            if (Input.GetKey(KeyCode.G) || Time.time >= timeWon)
             {
                 OptimoScore = 0;
                 PessimoScore = 0;
@@ -426,7 +426,7 @@ OptimoUnYeet();
             }
 
 
-            if (Input.GetKey(KeyCode.G) || Time.time > timeWon + winDelay)
+            if (Input.GetKey(KeyCode.G) || Time.time >= timeWon)
             {
                 OptimoScore = 0;
                 PessimoScore = 0;

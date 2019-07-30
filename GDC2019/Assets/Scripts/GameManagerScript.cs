@@ -48,7 +48,7 @@ public class GameManagerScript : MonoBehaviour
     void Update()
     {
         int mapSelect = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().mapSelect;  
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.Space))
         {
             Time.timeScale = 1;
             HasGameStarted = true;
