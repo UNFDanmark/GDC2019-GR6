@@ -34,9 +34,31 @@ public class ScoreManagerScript : MonoBehaviour
     public GameObject pessimoWinImage;
     public GameObject optimoWinImage;
 
+    public Vector3 startUIPosition;
+    public void OptimoYeet()
+    {
+        optimoWinImage.GetComponent<RectTransform>().position = new Vector3(9000,0);
+        print("yeet o");
+    }
+    public void OptimoUnYeet()
+    {
+        print("un yeet o");
+        optimoWinImage.GetComponent<RectTransform>().position = startUIPosition;//optimoWinImage.GetComponent<RectTransform>().sizeDelta / 2f;
+    }
+    public void PessimoYeet()
+    {
+        pessimoWinImage.GetComponent<RectTransform>().position = new Vector3(9000, 0);
+        print("yeet p");
+    }
+    public void PessimoUnYeet()
+    {
+        print("un yeet o");
+        pessimoWinImage.GetComponent<RectTransform>().position = startUIPosition;//optimoWinImage.GetComponent<RectTransform>().sizeDelta / 2f;
+    }
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
     }
 
     public void OnSceneChange(string sceneName) {
@@ -73,7 +95,10 @@ public class ScoreManagerScript : MonoBehaviour
 
     void Start()
     {
+        startUIPosition = optimoWinImage.GetComponent<RectTransform>().position;
 
+        OptimoYeet();
+        PessimoYeet();
         aS = GetComponent<AudioSource>();
         GameObject[] ScoreManagers = GameObject.FindGameObjectsWithTag("ScoreManager");
         int scoreManagerNo = ScoreManagers.Length;
@@ -81,20 +106,19 @@ public class ScoreManagerScript : MonoBehaviour
         {
             if (ScoreManagers[0].GetComponent<ScoreManagerScript>().OptimoScore + ScoreManagers[0].GetComponent<ScoreManagerScript>().PessimoScore < ScoreManagers[1].GetComponent<ScoreManagerScript>().OptimoScore + ScoreManagers[1].GetComponent<ScoreManagerScript>().PessimoScore)
             {
-                OptimoWinText.enabled = false;
-                PessimoWinText.enabled = false;
+                
                 Destroy(ScoreManagers[0]);
 
             }
 
             else
             {
-                OptimoWinText.enabled = false;
-                PessimoWinText.enabled = false;
+                
+                
                 Destroy(ScoreManagers[1]);
             }
-       }
-
+        }
+        
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         Text[] textArray= canvas.GetComponentsInChildren<Text>();
         foreach (Text scoreText in textArray)
@@ -149,15 +173,16 @@ public class ScoreManagerScript : MonoBehaviour
         if (OptimoScore == 2 && roundsSelected == 0)
         {
             OptimoScoreText.text = "2 - Optimo";
-            optimoWinImage.SetActive(true);
             
-            if(hasAlreadyPlayedWon == false)
+
+
+            if (hasAlreadyPlayedWon == false)
             {
                 aS.Stop();
                 aS.PlayOneShot(audioOptimoWin);
                 hasAlreadyPlayedWon = true;
                 timeWon = Time.time;
-                
+                OptimoUnYeet();
 
             }
             
@@ -167,23 +192,26 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 hasAlreadyPlayedWon = false;
-
+                
                 if (mapSelect == 0)
                 {
+                    
                     SceneManager.LoadScene("GameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
                 }
                 if (mapSelect == 1)
                 {
+                    
                     SceneManager.LoadScene("LargeGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
                 }
                 if (mapSelect == 2)
                 {
+                    
                     SceneManager.LoadScene("ObstacleGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
                 }
-                optimoWinImage.SetActive(false);
+                
 
             }
 
@@ -191,7 +219,7 @@ public class ScoreManagerScript : MonoBehaviour
         if (OptimoScore == 3 && roundsSelected == 1)
         {
             OptimoScoreText.text = "3 - Optimo";
-            optimoWinImage.SetActive(true);
+            
 
             if (hasAlreadyPlayedWon == false)
             {
@@ -199,7 +227,7 @@ public class ScoreManagerScript : MonoBehaviour
                 aS.PlayOneShot(audioOptimoWin);
                 hasAlreadyPlayedWon = true;
                 timeWon = Time.time;
-
+                OptimoUnYeet();
 
             }
 
@@ -209,24 +237,26 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 hasAlreadyPlayedWon = false;
-
+                OptimoYeet();
                 if (mapSelect == 0)
                 {
+                    
                     SceneManager.LoadScene("GameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
                 }
                 if (mapSelect == 1)
                 {
+                    
                     SceneManager.LoadScene("LargeGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
                 }
                 if (mapSelect == 2)
                 {
+                    
                     SceneManager.LoadScene("ObstacleGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
                 }
-                OptimoWinText.enabled = false;
-                optimoWinImage.SetActive(false);
+                
             }
 
         }
@@ -234,15 +264,15 @@ public class ScoreManagerScript : MonoBehaviour
         if (OptimoScore == 4 && roundsSelected == 2)
         {
             OptimoScoreText.text = "4 - Optimo";
-            OptimoWinText.enabled = true;
-            optimoWinImage.SetActive(false);
+            
+
             if (hasAlreadyPlayedWon == false)
             {
                 aS.Stop();
                 aS.PlayOneShot(audioOptimoWin);
                 hasAlreadyPlayedWon = true;
                 timeWon = Time.time;
-
+OptimoUnYeet();
 
             }
 
@@ -252,23 +282,26 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 hasAlreadyPlayedWon = false;
-
+                OptimoUnYeet();
                 if (mapSelect == 0)
                 {
+                    
                     SceneManager.LoadScene("GameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
                 }
                 if (mapSelect == 1)
                 {
+                    
                     SceneManager.LoadScene("LargeGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
                 }
                 if (mapSelect == 2)
                 {
+                    
                     SceneManager.LoadScene("ObstacleGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
                 }
-                optimoWinImage.SetActive(false);
+                
 
             }
 
@@ -290,9 +323,8 @@ public class ScoreManagerScript : MonoBehaviour
 
         if (PessimoScore == 2 && roundsSelected == 0)
         {
-            PessimoScoreText.text = "2 - Optimo";
-            PessimoWinText.enabled = true;
-            pessimoWinImage.SetActive(true);
+            PessimoScoreText.text = "Pessimo - 2";
+            
             if (hasAlreadyPlayedWon == false)
             {
                 aS.Stop();
@@ -309,32 +341,35 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 hasAlreadyPlayedWon = false;
+                PessimoUnYeet();
 
                 if (mapSelect == 0)
                 {
+                    
                     SceneManager.LoadScene("GameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
                 }
                 if (mapSelect == 1)
                 {
+                    
                     SceneManager.LoadScene("LargeGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
                 }
                 if (mapSelect == 2)
                 {
+                    
                     SceneManager.LoadScene("ObstacleGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
                 }
-                pessimoWinImage.SetActive(false);
+                
 
             }
 
         }
         if (PessimoScore == 3 && roundsSelected == 1)
         {
-            PessimoScoreText.text = "3 - Optimo";
-            PessimoWinText.enabled = true;
-            pessimoWinImage.SetActive(true);
+            PessimoScoreText.text = "Pessimo 3";
+            
 
             if (hasAlreadyPlayedWon == false)
             {
@@ -352,32 +387,34 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 hasAlreadyPlayedWon = false;
-
+                PessimoUnYeet();
                 if (mapSelect == 0)
                 {
+                    
                     SceneManager.LoadScene("GameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
                 }
                 if (mapSelect == 1)
                 {
+                    
                     SceneManager.LoadScene("LargeGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
                 }
                 if (mapSelect == 2)
                 {
+                    
                     SceneManager.LoadScene("ObstacleGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
                 }
-                pessimoWinImage.SetActive(false);
+                
 
             }
 
         }
         if (PessimoScore == 4 && roundsSelected == 2)
         {
-            PessimoScoreText.text = "4 - Optimo";
-            PessimoWinText.enabled = true;
-            pessimoWinImage.SetActive(true);
+            PessimoScoreText.text = "Pessimo - 4";
+            
             if (hasAlreadyPlayedWon == false)
             {
                 aS.Stop();
@@ -394,23 +431,27 @@ public class ScoreManagerScript : MonoBehaviour
                 OptimoScore = 0;
                 PessimoScore = 0;
                 hasAlreadyPlayedWon = false;
+                PessimoUnYeet();
 
                 if (mapSelect == 0)
                 {
+                    
                     SceneManager.LoadScene("GameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("GameScene");
                 }
                 if (mapSelect == 1)
                 {
+                    
                     SceneManager.LoadScene("LargeGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("LargeGameScene");
                 }
                 if (mapSelect == 2)
                 {
+                    
                     SceneManager.LoadScene("ObstacleGameScene");
                     GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManagerScript>().OnSceneChange("ObstacleGameScene");
                 }
-                pessimoWinImage.SetActive(false);
+                
 
             }
 
