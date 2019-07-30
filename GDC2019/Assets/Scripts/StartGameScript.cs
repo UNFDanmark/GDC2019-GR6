@@ -36,7 +36,7 @@ public class StartGameScript : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.Space))
         {
             StartGame();
 

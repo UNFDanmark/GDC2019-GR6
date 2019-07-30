@@ -10,6 +10,7 @@ TagManager:
   - Canvas
   - Round
   - Map
+  - Image
   layers:
   - Default
   - TransparentFX
