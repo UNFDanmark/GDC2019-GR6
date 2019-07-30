@@ -85,25 +85,10 @@ public class Player1Script :MonoBehaviour
         if (Vector3.Distance(StartVector, transform.position) >= 2) //if the player has moved 2 or more units away from their start position , then reset distance covered and run FindNextDestination.
         {
             DistanceCovered = 0;
-            /*Vector3 rotVect = currentDir.normalized - directions[i].normalized;
-            arrayTracker = (int)(8 * currentDir.normalized.x + 4 * currentDir.normalized.z + 2 * directions[i].x + directions[i].z);
-            if (rotArray[arrayTracker] == 0)
-            {
-                transform.eulerAngles = new Vector3(0, 90, 0);
-            }
-            else if (rotArray[arrayTracker] == 1)
-            {
-                transform.eulerAngles = new Vector3(0, -90, 0);
-            }
-            else if (rotArray[arrayTracker] == 2)
-            {
-                transform.eulerAngles = new Vector3(0, 180, 0);
-            }
-            */
             FindNextDestination();
         }
         transform.position = Vector3.Lerp(StartVector, EndVector, DistanceCovered); //moves the player according to percentage from a to b
-        print(rigid.velocity);
+        
     }
 
     void FindNextDestination() //makes sure the player doesn't go further than the endvector, creates new vectors.
