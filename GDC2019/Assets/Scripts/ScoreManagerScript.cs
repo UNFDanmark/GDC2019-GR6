@@ -169,12 +169,14 @@ public class ScoreManagerScript : MonoBehaviour
         {
             OptimoScoreText.text = "1 - Optimo";
         }
-
-        if (OptimoScore == 2 && roundsSelected == 0)
+        if (OptimoScore == 2)
         {
             OptimoScoreText.text = "2 - Optimo";
+        }
+        if (OptimoScore == 2 && roundsSelected == 0)
+        {
             
-
+            
 
             if (hasAlreadyPlayedWon == false)
             {
@@ -216,11 +218,13 @@ public class ScoreManagerScript : MonoBehaviour
             }
 
         }
-        if (OptimoScore == 3 && roundsSelected == 1)
+        if (OptimoScore == 3)
         {
             OptimoScoreText.text = "3 - Optimo";
+        }
+        if (OptimoScore == 3 && roundsSelected == 1)
+        {
             
-
             if (hasAlreadyPlayedWon == false)
             {
                 aS.Stop();
@@ -260,10 +264,12 @@ public class ScoreManagerScript : MonoBehaviour
             }
 
         }
-
-        if (OptimoScore == 4 && roundsSelected == 2)
+        if (OptimoScore == 4)
         {
             OptimoScoreText.text = "4 - Optimo";
+        }
+        if (OptimoScore == 4 && roundsSelected == 2)
+        {
             
 
             if (hasAlreadyPlayedWon == false)
@@ -320,10 +326,14 @@ OptimoUnYeet();
         {
             PessimoScoreText.text = "Pessimo - 1";
         }
-
-        if (PessimoScore == 2 && roundsSelected == 0)
+        if (PessimoScore == 2)
         {
             PessimoScoreText.text = "Pessimo - 2";
+        }
+            
+        if (PessimoScore == 2 && roundsSelected == 0)
+        {
+            
             
             if (hasAlreadyPlayedWon == false)
             {
@@ -366,9 +376,13 @@ OptimoUnYeet();
             }
 
         }
-        if (PessimoScore == 3 && roundsSelected == 1)
+        if (PessimoScore == 3)
         {
             PessimoScoreText.text = "Pessimo - 3";
+        }
+        if (PessimoScore == 3 && roundsSelected == 1)
+        {
+            
             
 
             if (hasAlreadyPlayedWon == false)
@@ -411,9 +425,13 @@ OptimoUnYeet();
             }
 
         }
-        if (PessimoScore == 4 && roundsSelected == 2)
+        if (PessimoScore == 4)
         {
             PessimoScoreText.text = "Pessimo - 4";
+        }
+        if (PessimoScore == 4 && roundsSelected == 2)
+        {
+            
             
             if (hasAlreadyPlayedWon == false)
             {

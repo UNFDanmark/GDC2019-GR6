@@ -1904,13 +1904,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701039596}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3852,6 +3852,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8540229395539506850, guid: 794d03fa26789614b85706be8474a17a,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b8fc98f3efb20644a8370ae3c1cea7ab, type: 3}
     - target: {fileID: 8540229395539506848, guid: 794d03fa26789614b85706be8474a17a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3937,10 +3942,5 @@ PrefabInstance:
       propertyPath: optimoWinImage
       value: 
       objectReference: {fileID: 2100895547}
-    - target: {fileID: 8540229395539506850, guid: 794d03fa26789614b85706be8474a17a,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b8fc98f3efb20644a8370ae3c1cea7ab, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 794d03fa26789614b85706be8474a17a, type: 3}
